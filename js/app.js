@@ -51,8 +51,7 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
-  const image = post.image;
-  console.log(post)
+    const image = post.image;
     const div = document.createElement( "article" );
     div.classList.add( "post" );
     div.innerHTML = `
@@ -121,7 +120,7 @@ const createPost = (post) => {
                   <div class="post__description">
                     <small>
                       <a class="post__name--underline" href="#">
-                          ${post.comments?.user}
+                          ${post.comments?.userImage}
                       </a>
                       ${post.comments?.text}
                     </small>
@@ -144,7 +143,8 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
-    const likedPosts = getLikedPosts();
+  const likedPosts = getLikedPosts();
+  document.getElementById("liked").textContent = " ";
     likedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "liked" ).appendChild(div);
@@ -164,6 +164,7 @@ const loadPosts = async () =>{
   let data = await fetch('https://raw.githubusercontent.com/ProgrammingHero1/insta-shohor/main/data/posts.json');
   posts = await data.json();
   showPosts(posts);
+  console.log(posts)
 }
 
 loadPosts();
